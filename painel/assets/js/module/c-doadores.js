@@ -25,7 +25,7 @@ export default {
     },
     filters: {
         format_data( data ) {
-            return data.substr(0, 10).split('-').reverse().join('/')
+            return data?.substr(0, 10)?.split('-')?.reverse()?.join('/') || null
         }
     },
     async mounted() {

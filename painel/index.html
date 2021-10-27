@@ -1156,7 +1156,7 @@
                     </div>
                     <div class="space"></div>
                     <div class="table">
-                        <div v-for="doador in doadores">
+                        <div v-for="doador in doadores" v-if="doador.nome">
                             <span><img class="gravatar" :src="'http://painel.doardigital.com.br/api/gravatar?email='+doador.email"></span>
                             <span class="w-50">
                                 {{ doador.nome }} <br>

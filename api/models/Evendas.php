@@ -115,7 +115,7 @@ class Evendas
         $codigo_boleto = $pay->codigo_boleto;
         $valor = $pay->valor;
         $boleto_url = $pay->boleto_url;
-        $url_pix = '00020101021226820014br.gov.bcb.pix2560pix.stone.com.br/pix/v2/c70dec3c-91c7-4185-9c18-67c24efa0ec8520400005303986540525.005802BR5914Conta primaria6014RIO DE JANEIRO6229052565a14170986c4b32894eeab5e63041E2F';
+        $url_pix = $pay->qr;
 
         $payload = [
             "NUMERO" => $id_fix,
@@ -196,7 +196,8 @@ class Evendas
             'tipo' => $_REQUEST['tipo'] ?? null,
             'codigo_boleto' => $_REQUEST['codigo_boleto'] ?? null,
             'valor' => $_REQUEST['valor'] ?? null,
-            'boleto_url' => $_REQUEST['boleto_url'] ?? null            
+            'boleto_url' => $_REQUEST['boleto_url'] ?? null,           
+            'qr' => $_REQUEST['qr'] ?? null            
         ];
         echo Evendas::send($payload, $token);        
     }

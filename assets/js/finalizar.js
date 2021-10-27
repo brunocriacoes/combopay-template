@@ -379,6 +379,7 @@ globalThis.app = new Vue({
                 valor: playload.quantia / 100,
                 boleto_url: res.boleto?.url || null,
                 instituicao_id: this.institution_id,
+                qr: res?.qr || null
             }
 
             let send_notify = await this.Super.notificacao_email({
@@ -388,7 +389,8 @@ globalThis.app = new Vue({
                 nome: playload.cliente.nome,
                 tipo: this.doacao.payment_type,
                 codigo_boleto: res.boleto?.codigo_barras || null,
-                boleto_url: res.boleto?.url || null
+                boleto_url: res.boleto?.url || null,
+                qr: res?.qr || null
 
             })
 

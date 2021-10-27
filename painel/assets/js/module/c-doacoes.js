@@ -27,8 +27,12 @@ export default {
             return data.substr(0, 10).split('-').reverse().join('/')
         },
         tipo(tipo) {
-            if (tipo == 'boleto') return 'Boleto'
-            return "Cartão"
+            let lib = {
+                boleto: "Boleto",
+                card: "Cartão",
+                pix: "PIX"
+            }
+            return lib[tipo] || tipo
         },
         status(status) {
             let lib = {

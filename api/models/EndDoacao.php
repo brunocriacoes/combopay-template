@@ -28,11 +28,13 @@ class EndDoacao
         $to = $_REQUEST['to'] ?? null;
         $nome = $_REQUEST['nome'] ?? null;
         $tipo = $_REQUEST['tipo'] ?? null;
+        $qr = $_REQUEST['qr'] ?? null;
         $conteudo = "
             Olá $nome, sua Doação está pendente..
             Somos imensamente gratos por sua doação. 
             Ela ajuda a manter todo projeto vivo e com pleno funcionamento
             Deus lhe abençoe poderosamente.
+            seu codigo pix: $qr
         ";
         $title = "Doação Pendente PIX";
         if ($status == 'error') return null;
