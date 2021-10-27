@@ -73,32 +73,32 @@ CREATE TABLE categoria (
 
 
 CREATE TABLE instituicao (
-    id
-    razao_social
-    nome_fantasia
-    email
-    telefone
-    rua
-    cidade
-    estado
-    bairro
-    complemento
-    cnpj
-    subdominio
-    dominio
-    dominio_personalizado
-    created_at
-    updated_at
-    ativo
-    cep
-    atividade
-    recebedor_id
-    admin_master
-    anotacao
+    id int not null  auto_increment primary key,
+    razao_social varchar(175),
+    nome_fantasia varchar(175),
+    email varchar(175),
+    telefone varchar(75),
+    rua varchar(175),
+    cidade varchar(145),
+    estado varchar(55),
+    bairro varchar(175),
+    complemento varchar(20),
+    cnpj varchar(55),
+    subdominio varchar(175),
+    dominio varchar(175),
+    dominio_personalizado varchar(175),
+    created_at varchar(55),
+    updated_at varchar(55)
+    ativo varchar(20),
+    cep varchar(55),
+    atividade varchar(20),
+    recebedor_id int,
+    admin_master varchar(75),
+    anotacao varchar(255),
 );
 
 CREATE TABLE configuracao (
-    id
+    id int not null  auto_increment primary key,
     instituicao_id
     flag
     base64

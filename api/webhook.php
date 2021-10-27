@@ -113,7 +113,9 @@ $sql = "SELECT * FROM integracao
 $result = $banco->query($sql);
 $token = $result[0]["identificacao_id"] ?? "";
 
-
+$bancoM = new BancoM;
+$sql2 = "UPDATE historico_compras SET status = '$current_status' WHERE id = $id_trasaction";
+$bancoM -> exec($sql2);
 
 $json = json_encode($_REQUEST);
 $data = date('Y-m-d H:i');
