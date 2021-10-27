@@ -110,6 +110,11 @@ $banco = new Banco;
 $sql = "SELECT * FROM integracao 
         WHERE instituicao_id=$instituicao_id AND tipo='EVENDAS'";
 
+$bancoM = new BancoM;
+$sql2 = "UPDATE historico_trascao SET status = '' WHERE id=$current_status";
+$bancoM = exec($sql2);
+
+
 $result = $banco->query($sql);
 $token = $result[0]["identificacao_id"] ?? "";
 

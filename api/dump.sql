@@ -98,7 +98,7 @@ CREATE TABLE instituicao (
 );
 
 CREATE TABLE configuracao (
-    id
+    id int not null  auto_increment primary key,
     instituicao_id
     flag
     base64
