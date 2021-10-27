@@ -5,7 +5,7 @@ class PagarMePix extends PagarMe
     {
         parent::__construct();
     }
-    function pay(int $amount): array
+    function pay(int $amount, array $split): array
     {
         $payload = [
             'payment_method' => 'pix',
@@ -16,8 +16,10 @@ class PagarMePix extends PagarMe
                     'name' => 'Doação',
                     'value' => 'R$' . number_format($amount / 100, 2, ',', '.')
                 ]
-            ]
+                ],
+            'split_rules' => $split
         ];
+        
         return $this->post('/transactions', $payload);
     }
     static function route()
@@ -30,8 +32,25 @@ class PagarMePix extends PagarMe
         $instituicao_id = $_REQUEST['instituicao_id'];
         $quantia = intval( $_REQUEST['quantia'] );
 
+        $con = new BancoM(); 
+        $cons = "SELECT * FROM split_configs 
+        WHERE instituicao_id=$instituicao_id";
+        $res_splits = $con->query($cons);
+        $dados_splits = [];
+        foreach ($res_splits as $i){
+            $dados_splits[] =  [
+                'recipient_id' => $i['recebedor_id'],
+                'liable' => $i['responsavel'],
+                'charge_processing_fee' => 1,
+                'percentage' => $i['porcetagem'],
+                'charge_remainder' => 1
+            ];
+        }
+        
+        
         $pix = new PagarMePix();        
-        $resposta = $pix->pay($quantia);
+        $resposta = $pix->pay($quantia, $dados_splits);
+
 
         $codigo_pix = $resposta['pix_qr_code'];
         $id = $resposta['id'];
@@ -42,7 +61,7 @@ class PagarMePix extends PagarMe
         $nome = $_REQUEST['cliente']['nome'];
         $cpf = $_REQUEST['cliente']['cpf'];
 
-        $con = new BancoM();
+        
         $sql = "INSERT INTO historico_compras ";
         $sql .= "( id, tipo, status, instituicao_id, doador_id, created_at, updated_at, quantia, nome, codigo_barras, url, cpf ) ";
         $sql .= "VALUES ";
