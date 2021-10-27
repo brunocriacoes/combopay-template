@@ -139,8 +139,8 @@ globalThis.app = new Vue({
             this.alerta = null
             let token = this.random_int(1, 999)
             let cunston_valor = parseInt( `${this.doacao.amount_custon}`.replace(/\D/gi, '') )
-            if(cunston_valor != 0 && cunston_valor <= 999) {
-                this.alerta = "o valor mínimo é 10"
+            if(cunston_valor != 0 && cunston_valor <= 2499) {
+                this.alerta = "o valor mínimo é 25"
                 return
             }            
             localStorage.setItem('recorrente', this.doacao.recorrente )

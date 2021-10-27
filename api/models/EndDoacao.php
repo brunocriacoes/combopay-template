@@ -17,7 +17,26 @@ class EndDoacao
         ";
         $title = "Doação Concluída";
         if ($status == 'error') return null;
-        if ($tipo == 'boleto') return null;
+        if ($tipo == 'boleto' && $tipo == 'pix') return null;
+        EndDoacao::send($instituicao_id, $conteudo, $to, $title);
+    }
+
+    static function email_success_pix()
+    {
+        $status = $_REQUEST['status'] ?? null;
+        $instituicao_id = $_REQUEST['instituicao_id'] ?? null;
+        $to = $_REQUEST['to'] ?? null;
+        $nome = $_REQUEST['nome'] ?? null;
+        $tipo = $_REQUEST['tipo'] ?? null;
+        $conteudo = "
+            Olá $nome, sua Doação está pendente..
+            Somos imensamente gratos por sua doação. 
+            Ela ajuda a manter todo projeto vivo e com pleno funcionamento
+            Deus lhe abençoe poderosamente.
+        ";
+        $title = "Doação Pendente PIX";
+        if ($status == 'error') return null;
+        if ($tipo == 'boleto' && $tipo == 'cartao') return null;
         EndDoacao::send($instituicao_id, $conteudo, $to, $title);
     }
 
@@ -133,6 +152,7 @@ class EndDoacao
 
     static function route()
     {
+        EndDoacao::email_success_pix();
         EndDoacao::email_success();
         EndDoacao::email_success_boleto();
         EndDoacao::email_error();

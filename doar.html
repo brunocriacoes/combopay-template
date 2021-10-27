@@ -46,7 +46,7 @@
                         </div>
                         <div>
                             <div v-if="doacao.amount==0 && doacao.recorrente!=1" >
-                                <b>Informe um valor</b>
+                                <b>Informe um valor, mínimo R$ 25,00. (Pix máximo R$ 1000,00 dia)</b>
                                 <input type="text" v-model="doacao.amount_custon" @input="money"  name="price_custon" placeholder="150,00">
                                 <div class="space"></div>
                             </div>
