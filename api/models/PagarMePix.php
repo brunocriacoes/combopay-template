@@ -7,6 +7,7 @@ class PagarMePix extends PagarMe
     }
     function pay(int $amount, array $split): array
     {
+
         $payload = [
             'payment_method' => 'pix',
             'amount' => $amount,
@@ -16,7 +17,7 @@ class PagarMePix extends PagarMe
                     'name' => 'Doação',
                     'value' => 'R$' . number_format($amount / 100, 2, ',', '.')
                 ]
-                ],
+            ],
             'split_rules' => $split
         ];
         return $this->post('/transactions', $payload);
@@ -24,31 +25,28 @@ class PagarMePix extends PagarMe
     static function route()
     {
 
-        
 
         $doador_id = 1;
         $metodo = $_REQUEST['metodo'];
         $instituicao_id = $_REQUEST['instituicao_id'];
-        $quantia = intval( $_REQUEST['quantia'] );
+        $quantia = intval($_REQUEST['quantia']);
 
-        $con = new BancoM(); 
+        $con = new BancoM();
         $cons = "SELECT * FROM split_configs 
         WHERE instituicao_id=$instituicao_id";
         $res_splits = $con->query($cons);
-        $daods_splits = [];
-        foreach ($res_splits as $i){
-            $daods_splits[] =  [
-                'recipient_id' => $i['recebedor_id'],
-                'liable' => $i['responsavel'],
-                'charge_processing_fee' => 1,
-                'percentage' => $i['porcetagem'],
-                'charge_remainder' => 1
+        $dados_splits = [];
+        foreach ($res_splits as $i) {
+            $dados_splits[] =  [
+                'recipient_id' =>  $i['recebedor_id'],
+                'liable' => (bool) intval($i['responsavel']),
+                'percentage' => intval($i['porcetagem']),
+
             ];
         }
 
-        $pix = new PagarMePix();        
-        $resposta = $pix->pay($quantia, $res_splits);
-
+        $pix = new PagarMePix();
+        $resposta = $pix->pay($quantia, $dados_splits);
 
         $codigo_pix = $resposta['pix_qr_code'];
         $id = $resposta['id'];
@@ -59,19 +57,18 @@ class PagarMePix extends PagarMe
         $nome = $_REQUEST['cliente']['nome'];
         $cpf = $_REQUEST['cliente']['cpf'];
 
-        
         $sql = "INSERT INTO historico_compras ";
         $sql .= "( id, tipo, status, instituicao_id, doador_id, created_at, updated_at, quantia, nome, codigo_barras, url, cpf ) ";
         $sql .= "VALUES ";
         $sql .= "( '$id', '$metodo', 'waiting_payment', '$instituicao_id', '$doador_id', '$created_at', '$updated_at', '$quantia', '$nome', '$codigo_pix', 'http://doardigital.com.br', '$cpf' )";
 
-        $con->exec( $sql );
-       
+        $con->exec($sql);
+
         echo json_encode([
             'status' => 'success',
             'message' => 'Sucesso',
             'qr' => $resposta['pix_qr_code'],
-            'id_transaction' => $resposta['id'], 
+            'id_transaction' => $resposta['id'],
             'sql' => $sql
         ]);
     }
