@@ -94,7 +94,7 @@ CREATE TABLE instituicao (
     atividade varchar(20),
     recebedor_id int,
     admin_master varchar(75),
-    anotacao varchar(255),
+    anotacao varchar(255)
 );
 
 CREATE TABLE configuracao (
@@ -106,3 +106,16 @@ CREATE TABLE configuracao (
     created_at
     updated_at
 );
+
+
+CREATE TABLE split_configs (
+    id int not null  auto_increment primary key,
+    responsavel varchar(55),
+    instituicao_id int,
+    recebedor_id int,
+    porcetagem int,
+    restos_taxas int,
+    created_at varchar(55),
+    updated_at varchar(55)
+);
+

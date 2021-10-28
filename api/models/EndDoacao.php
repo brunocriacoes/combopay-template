@@ -17,7 +17,7 @@ class EndDoacao
         ";
         $title = "Doação Concluída";
         if ($status == 'error') return null;
-        if ($tipo == 'boleto' && $tipo == 'pix') return null;
+        if ($tipo == 'boleto' || $tipo == 'pix') return null;
         EndDoacao::send($instituicao_id, $conteudo, $to, $title);
     }
 
@@ -38,7 +38,7 @@ class EndDoacao
         ";
         $title = "Doação Pendente PIX";
         if ($status == 'error') return null;
-        if ($tipo == 'boleto' && $tipo == 'cartao') return null;
+        if ($tipo == 'boleto' || $tipo == 'cartao') return null;
         EndDoacao::send($instituicao_id, $conteudo, $to, $title);
     }
 
