@@ -56,7 +56,6 @@ export default {
         },
         async load() {
             let smtp = await this.Super.get_smtp(this.cache.institution)
-            console.log(smtp)
             this.form.host_smtp = smtp.host || null
             this.form.port = smtp.porta || null
             this.form.email = smtp.usuario || null
