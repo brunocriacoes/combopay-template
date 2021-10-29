@@ -84,7 +84,7 @@ class EndDoacao
         ";
         $title = "Doação Falhada";
         if ($status == 'success') return null;
-        EndDoacao::send($instituicao_id, $conteudo, $to, $title);
+        //EndDoacao::send($instituicao_id, $conteudo, $to, $title);
     }
 
     static function send($instituicao_id, $conteudo, $to, $title)
@@ -103,6 +103,7 @@ class EndDoacao
             "from_nome" => $configuracao->title ?? '',
             "email" => $to
         ];
+        
         $payload['conteudo'] = $conteudo;
         $payload['link'] = "";
         $email->send($payload, false);

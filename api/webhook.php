@@ -90,8 +90,10 @@ $conteudo = [
         Deus lhe abençoe poderosamente.
     ",
 ];
+if($current_status != "waiting_payment"){
+    EndDoacao::send($instituicao_id, $conteudo[$current_status] ?? '...', $email, $titulos[$current_status] ?? 'Doação');
 
-EndDoacao::send($instituicao_id, $conteudo[$current_status] ?? '...', $email, $titulos[$current_status] ?? 'Doação');
+}
 
 $payload = [
     'email' => $email,

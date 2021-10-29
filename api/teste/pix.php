@@ -7,4 +7,4 @@ $pay = new PagarMePix();
 
 $res = $pay->pay(5000);
 
-var_dump($res);
+//var_dump($res);

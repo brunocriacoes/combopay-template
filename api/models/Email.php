@@ -2,10 +2,11 @@
 class Email
 {
     function send($payload, $print = false)
-    {
+    {   
+        
         $con =  new Banco;
         $ID = intval($payload['instituicao_id'] ?? 0);
-        $sql = "SELECT * FROM smtp WHERE id=$ID";
+        $sql = "SELECT * FROM smtp WHERE instituicao_id=$ID";
         $query = $con->query($sql);
 
         $smtp = [
