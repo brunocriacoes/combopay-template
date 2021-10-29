@@ -357,6 +357,12 @@ class App {
         return await res.json()
     }
 
+    async get_smtp(instituicao_id){
+        let full_url = this.base_2
+        full_url += `/smtp?instituicao_id=`+ instituicao_id
+        let res = await fetch(full_url)
+        return await res.json()
+    }
 }
 
 export default App;

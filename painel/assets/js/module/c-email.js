@@ -10,7 +10,14 @@ export default {
             Super,
             cache,
             Domain,
-            form: {},
+            form: {
+                host_smtp: null,
+                port: null,
+                email: null,
+                senha: null,
+                name: null
+            
+            },
             title: 'Configurar E-mail',
             flag: 'PHP_MAILER',
             loading: false,
@@ -48,14 +55,14 @@ export default {
             return await this.Super.flag_post(playload)
         },
         async load() {
-            let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-            let flag = all_flags.find(post => post.flag == this.flag)
-            if (flag) {
-                this.id = flag.id
-                this.form = JSON.parse(atob(flag.base64))
-            } else {
-                this.is_flag = true
-            }
+            let smtp = await this.Super.get_smtp(this.cache.institution)
+            console.log(smtp)
+            this.form.host_smtp = smtp.host || null
+            this.form.port = smtp.porta || null
+            this.form.email = smtp.usuario || null
+            this.form.senha = smtp.senha || null
+            this.form.name = smtp.nome || null
+            
 
         },
         async save() {
