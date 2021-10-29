@@ -325,6 +325,30 @@ class App {
 
     }
 
+    async save_smtp({ instituicao_id, host_smtp, port, email, senha, name}) {
+
+        let full_url = this.base_2
+        full_url += `/smtp`
+
+        let form = new FormData()
+        form.append('instituicao_id', instituicao_id)
+        form.append('host', host_smtp)
+        form.append('porta', port)
+        form.append('usuario', email)
+        form.append('senha', senha)
+        form.append('nome', name)
+        let options = {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: form
+        }
+
+        let res = await fetch(full_url, options)
+        return await res.json()
+
+    }
+   
     async list_institution_by_adm( email ) {
         let full_url = this.base_2
         full_url += `/instituicao-por-admin`

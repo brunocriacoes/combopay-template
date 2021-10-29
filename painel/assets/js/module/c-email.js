@@ -65,7 +65,16 @@ export default {
                 flag: this.flag,
                 instituicao_id: this.cache.institution
             }
-            let res = await this.Super.flag_put(this.id, playload)
+            let payload = { 
+                instituicao_id: this.cache.institution,
+                 host_smtp: this.form.host_smtp,
+                 port: this.form.port, 
+                 email: this.form.email, 
+                 senha: this.form.senha, 
+                 name: this.form.name
+                }
+
+            let res = await this.Super.save_smtp(payload)
             this.error.status = true
             this.error.text = res.message
             this.error.type = res.status
