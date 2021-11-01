@@ -38,7 +38,7 @@ class EndDoacao
         ";
         $title = "Doação esperando o  PIX";
         if ($status == 'error') return null;
-        if ($tipo == 'boleto' || $tipo == 'card') return null;
+        if ($tipo == 'boleto' || $tipo == 'credit_card') return null;
         EndDoacao::send($instituicao_id, $conteudo, $to, $title);
     }
 
