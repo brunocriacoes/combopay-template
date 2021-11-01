@@ -7,7 +7,6 @@ class PagarMePix extends PagarMe
     }
     function pay(int $amount, array $split): array
     {
-
         $payload = [
             'payment_method' => 'pix',
             'amount' => $amount,
@@ -24,7 +23,6 @@ class PagarMePix extends PagarMe
     }
     static function route()
     {
-
 
         $doador_id = 1;
         $metodo = $_REQUEST['metodo'];

@@ -139,7 +139,7 @@ globalThis.app = new Vue({
             this.alerta = null
             let token = this.random_int(1, 999)
             let cunston_valor = parseInt( `${this.doacao.amount_custon}`.replace(/\D/gi, '') )
-            if(cunston_valor != 0 && cunston_valor <= 2499) {
+            if(cunston_valor != 0 && cunston_valor <= 1000) {
                 this.alerta = "o valor mínimo é 25"
                 return
             }            
