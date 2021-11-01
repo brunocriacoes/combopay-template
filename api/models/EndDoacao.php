@@ -15,7 +15,7 @@ class EndDoacao
             Ela ajuda a manter todo projeto vivo e com pleno funcionamento
             Deus lhe abençoe poderosamente.
         ";
-        $title = "Doação Concluída";
+        $title = "Doação brevemente Concluída";
         if ($status == 'error') return null;
         if ($tipo == 'boleto' || $tipo == 'pix') return null;
         EndDoacao::send($instituicao_id, $conteudo, $to, $title);
@@ -36,7 +36,7 @@ class EndDoacao
             Deus lhe abençoe poderosamente.
             seu codigo pix: $qr
         ";
-        $title = "Doação Pendente PIX";
+        $title = "Doação esperando o  PIX";
         if ($status == 'error') return null;
         if ($tipo == 'boleto' || $tipo == 'cartao') return null;
         EndDoacao::send($instituicao_id, $conteudo, $to, $title);
