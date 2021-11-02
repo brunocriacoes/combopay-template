@@ -173,7 +173,10 @@ section.hero p {
 .child p{
   font-size: 2.2rem;
 }
-
+''
+.div-botao-1 {
+  margin-bottom: 50px;
+}
 /*=============== 
 MAIN
 ==================*/
@@ -181,4 +184,26 @@ main {
   margin-bottom: 80px;
 }
 
+/*=================================================== 
+10 - RODAPE
+======================================================*/
 
+.imagem-rodape {
+  max-width: 120px;
+  padding-bottom: 20px;
+}
+
+.container-rodape {
+  display: flex;
+  text-align: center;
+  background-color: #F0EEF0;
+}
+
+.c-rodape {
+  width:100%;
+}
+
+.c-rodape p {
+  color:#2D85C1;
+  padding-top: 20px;
+}
