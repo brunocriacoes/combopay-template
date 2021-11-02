@@ -13,10 +13,11 @@ class Doador
 
     static function pesquisa($nome): bool{
         $con = new BancoM();
-        $sql = "SELECT * FROM doador WHERE nome=$nome";
+        $sql = "SELECT * FROM doador WHERE nome='$nome'";
+        var_dump($sql);
         $guard = $con->query($sql);
         return empty($guard);
-        var_dump($guard);
+        
     }
     
     static function teste(){
