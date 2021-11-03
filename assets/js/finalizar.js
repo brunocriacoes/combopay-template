@@ -68,7 +68,7 @@ globalThis.app = new Vue({
             amount_custon: 0,
             nome: '',
             sobrenome: '',
-            dataNascimento: '',
+            dataNascimento: '1970-01-01',
             email: '',
             telefone: '',
             cpf: '',
@@ -84,7 +84,7 @@ globalThis.app = new Vue({
             nome_card: "",
             payment_type: 'card',
             complemento: 'nao definido',
-            sexo: "",
+            sexo: "masculino",
         },
 
     },
