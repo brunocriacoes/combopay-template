@@ -9,3 +9,6 @@ if (file_exists($path_template)) {
 } else {
     echo file_get_contents( $path_template_padrao);
 }
+
+
+

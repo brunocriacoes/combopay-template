@@ -1,5 +1,6 @@
 <?php
 
+
 interface IPagarMeCostumer extends PagarMe
 {
     public function create(
