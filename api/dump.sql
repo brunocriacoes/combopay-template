@@ -119,3 +119,303 @@ CREATE TABLE split_configs (
     updated_at varchar(55)
 );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREDENCIAL (
+    nome
+    recursos
+    criado_em
+    atualizado_em
+)
+
+
+USUÁRIO (
+    email
+    ativo
+    nome
+    sobrenome
+    telefone
+    senha
+    foto
+    credencial
+    cpf
+    data_nascimento
+    criado_em
+    atualizado_em
+)
+
+MEU PLANO (
+    plan_id
+    status
+    customer_id
+    usuario_id
+)
+
+TABELA TAXONOMIA PLANOS (
+    id_instituicao
+    meu_plano_id
+)
+
+TABELA TAXONOMIA (
+    id_usuario
+    id_instituicao
+    tipo
+)
+
+RECEBEDORES (
+    id_recebedor
+    endereco
+    banco
+    agencia
+)
+
+MODULOS (
+    tipo
+    token
+    chave
+    secret
+    criado_em
+    atualizado_em
+)
+
+INSCRITOS (
+    nome
+    email
+    telefone
+    id_instituicao
+)
+
+INSTITUIÇÃO (
+    ativo
+    email
+    cnpj
+    razao_social
+    nome_fantasia
+    telefone
+    subdominio
+    dominio
+    qr_code
+    recebedor_id
+    id_carteira
+    criado_em
+    atualizado_em
+)
+
+SPLIT (
+    instituicao_id
+    recebedor_id
+    resto_taxas
+    responsavel
+    porcentagem
+    criado_em
+    atualizado_em
+)
+
+EMAILS (
+    instituicao_id
+    tipo
+    titulo
+    assunto
+    corpo
+    cron
+)
+
+DOAÇÃO (
+    instituicao_id
+    doador_id
+    transacao_id
+    status
+    tipo
+    plano_id
+    valor
+    codigo_barras
+    url_boleto
+    codigo_pix
+    url_qrcode
+    criado_em
+    atualizado_em
+)
+
+DOADOR (
+    email
+    senha
+    nome
+    telefone
+    cpf
+    customer_id
+    criado_em
+    atualizado_em
+)
+
+ENDERECOS (
+    referencia_id
+    cep
+    pais
+    estado
+    cidade
+    bairro
+    rua
+    complemento
+    numero
+)
+
+SMTP (
+    instituicao_id
+    host
+    protocolo
+    porta
+    email
+    senha
+    logo
+    cor
+    nome
+)
+
+PLANOS (
+    ativo
+    nome
+    prazo
+    quantia
+    instituicao_id
+)
+
+ASSINATURA (
+    doador_id
+    subscription_id
+    plan_id
+    status
+    ativo
+    criado_em
+)
+
+TRANSAÇÕES (
+    instituicao_id
+    metodo
+    plan_id
+    valor
+    id_doador
+    token
+    reference_key
+    status
+    id_transacao
+    url_boleto
+    cod_boleto
+    cod_pix
+    url_pix
+    data_criado
+    id_cartao
+    id_endereco
+)
+
+DASHBOARD (
+    instituicao_id
+    total_doacoes
+    doacoes_concluidas
+    doacoes_em_aberto
+    doacoes_vencidas
+    boletos_em_aberto
+    boletos_pagos
+    creditos_em_aberto
+    creditos_pagos
+    pix_em_aberto
+    pix_pago
+    doacoes_previstas
+    novos_doadores
+    doadores_recorrentes
+    doadores_unicos
+    doacao_media
+    doadores_adimplentes
+    doadores_inadimplentes
+    metas
+    total_cartao
+    total_boleto
+    total_pix
+)
+
+CARTÕES (
+    token
+    doador_id
+    n_cartao
+    data_expiracao
+)
+
+METAS (
+    ano
+    instituicao_id
+    janeiro
+    fevereiro
+    marco
+    abril
+    maio
+    junho
+    julho
+    agosto
+    setembro
+    outubro
+    novembro
+    dezembro
+)
+
+
+log_emails (
+    
+)
+
+log_webhooks (
+    
+)
+
+log_evendas (
+    
+)
+
+log_rdstation (
+    
+)
