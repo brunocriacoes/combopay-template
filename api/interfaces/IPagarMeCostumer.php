@@ -11,7 +11,7 @@ interface IPagarMeCostumer extends PagarMe
         array $cpf
     ): int;
 
-    public function get(
+    public function get_by_id(
         int $customer_id
     ): array;
 
