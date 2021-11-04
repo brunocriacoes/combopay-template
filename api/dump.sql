@@ -40,7 +40,7 @@ CREATE TABLE doacao (
     boleto_url varchar(255),
     boleto_codigo varchar(255),
     pix varchar(255),
-    callback varchar(255)
+    callback varchar(255),
     data_registro varchar(25)
 );
 
