@@ -17,7 +17,7 @@ class Doador implements IDoador
         $banco = new BancoM;
         $sql = "SELECT * FROM doador WHERE cpf='$cpf' or email='$email'";
         $guard = $banco->query($sql);
-        return $sql;
+        return !empty($guard);
     }
     
 
@@ -31,7 +31,10 @@ class Doador implements IDoador
 
     public function add_costumer_id(int $id, int $costumer_id_pagar_me): void
     {
-        var_dump($guard);
+        $banco = new BancoM();
+        $sql = "UPDATE doador SET codigo_pagarme='$costumer_id_pagar_me' WHERE id='$id'";
+        $banco->exec($sql);
+        
         
     }
 
@@ -58,7 +61,7 @@ class Doador implements IDoador
         
         
     }
-    public function create(string $name, string $email, int $external_id, array $phone_numbers, array $cpf, string $senha = '', string $genero = '', int $costumer_id = 0): int
+    public function create(string $name, string $email, int $external_id, string $phone_numbers, string $cpf, string $senha = '', string $genero = '', int $costumer_id = 0): int
     {
         $banco = new BancoM();
         $sql = "INSERT INTO doador";
@@ -71,7 +74,7 @@ class Doador implements IDoador
 
     static function teste()
     {
-        Doador::get_by_cpf("63203995972");
+        Doador::create("63203995972");
     }
 
 

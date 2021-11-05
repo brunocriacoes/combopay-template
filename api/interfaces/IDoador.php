@@ -28,8 +28,8 @@ interface IDoador
         string $name,
         string $email,
         int $external_id,
-        array $phone_numbers,
-        array $cpf,
+        string $phone_numbers,
+        string $cpf,
         string $senha = '',
         string $genero = '',
         int $costumer_id = 0
