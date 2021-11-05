@@ -1,14 +1,14 @@
 <?php
 
 
-interface IPagarMeCostumer extends PagarMe
+interface IPagarMeCostumer
 {
     public function create(
         string $name,
         string $email,
-        int $external_id,
+        string $external_id,
         array $phone_numbers,
-        array $cpf
+        string $cpf
     ): int;
 
     public function get_by_id(

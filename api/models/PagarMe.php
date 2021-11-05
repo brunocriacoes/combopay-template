@@ -12,11 +12,14 @@ class PagarMe
         $this->postback_url = $env['postback_url'];
     }
 
-    public function post(string $path, array $payload): array
+    public function post(string $path, array $payload, bool $webhook = true): array
     {
         $payload['api_key'] = $this->api_key;
         $full_path =  $this->base . $path;
-        $payload['postback_url'] = $this->postback_url;
+        if($webhook){
+            
+            $payload['postback_url'] = $this->postback_url;
+        }
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'POST',
@@ -24,6 +27,8 @@ class PagarMe
                 'content' => json_encode($payload)
             )
         ));
+        echo json_encode($payload);
+        die();
         $result = file_get_contents($full_path, FALSE, $context);
         return json_decode($result, true);
     }
