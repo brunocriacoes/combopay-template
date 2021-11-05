@@ -14,39 +14,50 @@ class PagarMe
 
     public function post(string $path, array $payload, bool $webhook = true): array
     {
-        $payload['api_key'] = $this->api_key;
-        $full_path =  $this->base . $path;
-        if($webhook){
-            
-            $payload['postback_url'] = $this->postback_url;
+        try {
+            $payload['api_key'] = $this->api_key;
+            $full_path =  $this->base . $path;
+            if ($webhook) {
+
+                $payload['postback_url'] = $this->postback_url;
+            }
+            $context = stream_context_create(array(
+                'http' => array(
+                    'method' => 'POST',
+                    'header' => "Content-Type: application/json; charset=UTF-8\r\n",
+                    'content' => json_encode($payload)
+                )
+            ));
+
+            $result = file_get_contents($full_path, FALSE, $context);
+            return json_decode($result, true);
+        } catch (\Throwable $th) {
+            return [
+                "error" => "Não foi possivel acessar pagar me"
+            ];
         }
-        $context = stream_context_create(array(
-            'http' => array(
-                'method' => 'POST',
-                'header' => "Content-Type: application/json; charset=UTF-8\r\n",
-                'content' => json_encode($payload)
-            )
-        ));
-        echo json_encode($payload);
-        die();
-        $result = file_get_contents($full_path, FALSE, $context);
-        return json_decode($result, true);
     }
 
     public function get(string $path, array $payload): array
     {
-        $payload['api_key'] = $this->api_key;
-        $payload['postback_url'] = $this->postback_url;
-        $full_path =  $this->base . $path;
-        $context = stream_context_create(array(
-            'http' => array(
-                'method' => 'GET',
-                'header' => "Content-Type: application/json; charset=UTF-8\r\n",
-                'content' => json_encode($payload)
-            )
-        ));
-        $result = file_get_contents($full_path, FALSE, $context);
-        return json_decode($result, true);
+        try {
+            $payload['api_key'] = $this->api_key;
+            $payload['postback_url'] = $this->postback_url;
+            $full_path =  $this->base . $path;
+            $context = stream_context_create(array(
+                'http' => array(
+                    'method' => 'GET',
+                    'header' => "Content-Type: application/json; charset=UTF-8\r\n",
+                    'content' => json_encode($payload)
+                )
+            ));
+            $result = file_get_contents($full_path, FALSE, $context);
+            return json_decode($result, true);
+        } catch (\Throwable $th) {
+            return [
+                "error" => "Não foi possivel acessar pagar me"
+            ];
+        }
     }
 
     public function put(string $path, array $payload): array

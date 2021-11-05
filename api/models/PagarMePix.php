@@ -23,8 +23,8 @@ class PagarMePix extends PagarMe
     }
     static function route()
     {
+        header("Content-Type: application/json");
 
-        $doador_id = 1;
         $metodo = $_REQUEST['metodo'];
         $instituicao_id = $_REQUEST['instituicao_id'];
         $quantia = intval($_REQUEST['quantia']);
@@ -43,6 +43,8 @@ class PagarMePix extends PagarMe
             ];
         }
 
+        $doador = new Doador();
+
         $pix = new PagarMePix();
         $resposta = $pix->pay($quantia, $dados_splits);
 
@@ -55,6 +57,41 @@ class PagarMePix extends PagarMe
         $nome = $_REQUEST['cliente']['nome'];
         $cpf = $_REQUEST['cliente']['cpf'];
 
+        $costumer = null;
+
+        if( !$doador->exist( $cpf ) ) {
+            
+            $doador->create(
+                $_REQUEST['cliente']['nome'],
+                $_REQUEST['cliente']['email'],
+                $_REQUEST['cliente']['telefone'],
+                $cpf,
+                '',
+                '',
+                0,
+                $_REQUEST['instituicao_id'],
+                $_REQUEST
+            );
+        } 
+
+        $costumer = $doador->get_by_cpf($cpf);
+
+        if( $costumer['codigo_pagarme'] == '1' ) {
+            $pagar_me_costumer = new PagarMeCostumer();
+
+            $id_costumer = $pagar_me_costumer->create(
+                $_REQUEST['cliente']['nome'],
+                $_REQUEST['cliente']['email'],
+                $costumer['id'],
+                [$_REQUEST['cliente']['telefone']],
+                $cpf
+            );
+            $doador->add_costumer_id( $costumer['id'], $id_costumer );
+        }
+
+        $costumer = $doador->get_by_cpf($cpf);
+
+        $doador_id = $costumer['id'];
         $sql = "INSERT INTO historico_compras ";
         $sql .= "( id, tipo, status, instituicao_id, doador_id, created_at, updated_at, quantia, nome, codigo_barras, url, cpf ) ";
         $sql .= "VALUES ";

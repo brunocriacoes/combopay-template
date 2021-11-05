@@ -4,8 +4,7 @@ interface IDoador
 {
 
     public function exist(
-        string $cpf,
-        string $email
+        string $cpf
     ): bool;
 
     public function get_by_id(
@@ -27,13 +26,14 @@ interface IDoador
     public function create(
         string $name,
         string $email,
-        int $external_id,
         string $phone_numbers,
         string $cpf,
         string $senha = '',
         string $genero = '',
-        int $costumer_id = 0
-    ): int;
+        int $costumer_id = 0,
+        int $instituicao_id = 1,
+        array $options
+    ): void;
 
     public function add_costumer_id(
         int $id,

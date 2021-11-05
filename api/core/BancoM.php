@@ -11,16 +11,26 @@ class BancoM
     }
     function query(string $sql): array
     {
-        $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
-        $query = $con->query($sql);
-        $result = $query->fetchAll();
-        $con = null;
-        return $result;
+        try {
+            $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
+            $query = $con->query($sql);
+            $result = $query->fetchAll();
+            $con = null;
+            return $result;
+        } catch (\Throwable $th) {
+            return [
+                "error" => "Não foi possivel acessar o banco"
+            ];
+        }
     }
     function exec(string $sql): void
     {
-        $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
-        $query = $con->query($sql);
-        $con = null;
+        try {
+            $con = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
+            $query = $con->query($sql);
+            $con = null;
+        } catch (\Throwable $th) {
+            echo "Não foi possivel acessar o banco";
+        }
     }
 }
