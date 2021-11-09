@@ -33,7 +33,7 @@ export default {
                 this.cache.user_logged_credential_id = res?.admin?.credencial
                 this.cache.bearer = res?.token?.access_token
                 let corruente_user = await this.App.get_admin(res?.admin?.id)
-                this.cache.institution = minha_instituicao.id
+                this.cache.institution = res?.admin?.instituicao_id
                 let credencial = res?.admin?.credencial
                 if( credencial < 22 && credencial != 20 && credencial != 1 ) {
                     window.location.href = this.redirect[credencial]
