@@ -63,7 +63,7 @@ globalThis.app = new Vue({
         },
         planos: [],
         doacao: {
-            recorrente: null,
+            recorrente: 1,
             amount: null,
             amount_custon: 0,
             nome: null,
