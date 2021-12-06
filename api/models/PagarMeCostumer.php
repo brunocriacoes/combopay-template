@@ -1,28 +1,46 @@
 <?php
 
-class PagarMeCostumer extends PagarMe{
+include __DIR__ . '/../interfaces/IPagarMeCostumer.php';
 
-    function cadastro(int $amount, array $split): array
+class PagarMeCostumer extends PagarMe implements IPagarMeCostumer{
+    
+    function __construct()
     {
+        parent::__construct();
+    }
+    
+    public function get_by_id(int $customer_id): array
+    {
+    }
 
+    public function create(string $name, string $email, string $external_id, array $phone_numbers, string $cpf): int
+    {
         $payload = [
-            'name' => null,
-            'email' => null,
-            'external_id' => null,
-            'type' => null,
-            'country' => null,
-            'birthday' => null,
-            'phone_numbers' => [],
-            'documents' => []
+            'name' => $name,
+            'email' => $email,
+            'external_id' => $external_id,
+            'type' => 'individual',
+            'country' => 'br',
+            'phone_numbers' => $phone_numbers,
+            'documents' => [[
+                'type' => 'cpf',
+                'number' => $cpf
+            ]]
             
         ];
-        return $this->post('/transactions', $payload);
+        $res = $this->post('/customers', $payload, false);
+        return $res['id'];
+    
     }
+    
 
+    public function update(int $customer_id, string $name, string $email): void
+    {}
 
-    static function router(){
-        
-        
+    static function teste() {
+        $costumer = new PagarMeCostumer();
+        $costumer->create("victor", "victorfer@gmail.com", "12", ['+5538998019210'], '80303740035');
     }
+    
 
 }
