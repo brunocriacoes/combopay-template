@@ -70,3 +70,15 @@ globalThis.app = new Vue({
         }
     }
 }).$mount("#app");
+
+let valor_storage = localStorage.getItem('amount')
+let valor_float = valor_storage / 100
+valor_float = valor_float.toFixed(2)
+
+if(window.location.host == 'doar.associacaoguadalupe.org.br') {
+    fbq('track', 'Purchase', {currency: "BRL", value: valor_float});
+}
+
+if(window.location.host == 'doar.comunidadecatolicaagape.com.br') {
+    fbq('track', 'Purchase', {currency: "BRL", value: valor_float});
+}

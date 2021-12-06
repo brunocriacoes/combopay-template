@@ -9,9 +9,41 @@
     <script src="./assets/js/library/qrcode.js"  defer></script>
     <script src="./assets/js/obrigado.js" type="module" defer></script>
     <link rel="shortcut icon" href="./assets/logo/ico.svg" type="image/x-icon">
+
+    <script defer>
+
+        let lb = {}
+        lb['doar.associacaoguadalupe.org.br'] = '709946779621249'
+        lb['doar.comunidadecatolicaagape.com.br'] = '423349565758828'
+
+        var id = lb[window.location.host]
+
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', id);
+        fbq('track', 'PageView');
+
+    </script>
+   
+    
 </head>
 
 <body>
+    
+    <img height="1" width="1" style="display:none" src="" id="js-img-pixel" />
+    <script>
+        let path_image_url = `https://www.facebook.com/tr?id=${id}&ev=PageView&noscript=1`
+        let $img_pixel = document.querySelector('#js-img-pixel')
+        $img_pixel.src = path_image_url
+    </script>
+
     <div id="app">
         <header :style="{ backgroundColor: backgroundColor }">
             <img id="logo" :src="layout.logo" alt="Logo de Bethânia">
